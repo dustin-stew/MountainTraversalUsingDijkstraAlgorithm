@@ -119,8 +119,9 @@ public class MapDataDrawer {
    *
    * @return the total change in elevation traveled from West-to-East
    */
+
   public int drawLowestElevPath(Graphics g, int startRow) {
-    g.setColor(new Color(141, 172, 181, 3));
+    g.setColor(new Color(241, 34, 143, 5));
 
     int totalElevationChange = 0;
     int currentCol = 0;
@@ -212,7 +213,7 @@ public class MapDataDrawer {
 
   }
   public void drawDjikstra(Graphics g, ArrayList<Integer> path) {
-    g.setColor(new Color(255, 48, 120));
+    g.setColor(new Color(219, 255, 0));
     for (int i = 0; i < path.size(); i++) {
       int r = path.get(i)/cols - 1;
       int c = path.get(i)%cols;

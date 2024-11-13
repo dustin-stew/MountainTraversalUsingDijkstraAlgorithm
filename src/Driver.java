@@ -30,7 +30,7 @@ public class Driver {
         map.drawMap(g);
 
         // Test Step 4 - draw a greedy path
-        g.setColor(Color.RED); // can set the color of the 'brush' before drawing, then method doesn't need to
+        g.setColor(new Color(219, 255, 0)); // can set the color of the 'brush' before drawing, then method doesn't need to
         // worry about it
         int totalChange = map.drawLowestElevPath(g, minRow); // use minRow from Step 2 as starting point
         System.out.println(
@@ -39,19 +39,17 @@ public class Driver {
         // Test Step 5 - draw the best path
         int bestRow = map.indexOfLowestElevPath(g);
 
-        // map.drawMap(g); //use this to get rid of all red lines
         totalChange = map.drawLowestElevPath(g, bestRow);
         System.out.println("The Lowest-Elevation-Change Path starts at row: " + bestRow
                 + " and gives a total change of: " + totalChange);
 
 
         Scanner sc = new Scanner(System.in);
-        boolean computeDjikstra = false;
 
 
         while (true) {
             System.out.println("\nWould you like to calculate a path using Djikstra's algorithm? Enter y if so. Enter any other key to exit.");
-            if (!sc.nextLine().equals("y")) break;
+            if (!sc.nextLine().toLowerCase().equals("y")) break;
             int startRow;
             int endRow = 0;
             boolean BestEndRow = false;
