@@ -1,7 +1,7 @@
 ## Traversing the Colorado Mountains using Dijkstra's Shortest Path Algorithm
 #### Author: Dustin Stewart
-![image](images/MountainTraverse.gif)
 ### NOTE: I added these files to Github [here](https://github.com/dustin-stew/MountainTraversalUsingDijkstraAlgorithm) if that's easier.
+![image](images/MountainTraverse.gif)
 ### Structure
 [Driver.java](Driver.java) - This  is the main driver of the project  
 #### *For Dijkstra's shortest path*:
@@ -20,7 +20,7 @@ Enter y to run and then you can do one of four things:
    * **Calculates**: all shortest paths between provided start and all eastern points  
 
 [MapDataDrawer.java](MapDataDrawer.java) - draws the routes on the topography map  
-[dijkstra.java](dijkstra.java) - uses Dijkstra's shortest path algorithm to calculate the optimal routes.
+[dijkstra.java](dijkstra.java) - uses Dijkstra's shortest path algorithm to calculate the optimal routes.  
 [DrawingPanel.java](DrawingPanel.java)  - Helper class for drawing
 
 
