@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,8 +28,6 @@ public class Driver {
         map.drawMap(g);
 
         // Test Step 4 - draw a greedy path
-        g.setColor(new Color(219, 255, 0)); // can set the color of the 'brush' before drawing, then method doesn't need to
-        // worry about it
         int totalChange = map.drawLowestElevPath(g, minRow); // use minRow from Step 2 as starting point
         System.out.println(
                 "Lowest-Elevation-Change Path starting at row " + minRow + " gives total change of: " + totalChange);
@@ -44,17 +40,22 @@ public class Driver {
                 + " and gives a total change of: " + totalChange);
 
 
+
+        // The code below is extra - it implements Dijkstra's shortest path algorithm
         Scanner sc = new Scanner(System.in);
 
-
         while (true) {
-            System.out.println("\nWould you like to calculate a path using Djikstra's algorithm? Enter y if so. Enter any other key to exit.");
+            System.out.println("\nWould you like to calculate a path using Dijkstra's algorithm? Enter y if so. Enter any other key to exit.");
             if (!sc.nextLine().toLowerCase().equals("y")) break;
             int startRow;
             int endRow = 0;
             boolean BestEndRow = false;
-            System.out.println("\nTo calculate the most efficient route using Djikstra's algorithm please enter the below values!\n");
+            System.out.println("\nTo calculate the most efficient route using Dijkstra's algorithm please enter the below values!\n");
             System.out.println("Enter starting row (enter default if you'd like to use the same number from the previous step): ");
+
+            // for start and end row, if an integer is entered,
+            // use that as the value, otherwise use the best row
+            // from the previous step
             try {
                 startRow = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -67,16 +68,14 @@ public class Driver {
                 BestEndRow = true;
             }
 
-
+            // get number of vertexes and starting coordinate
             int V = map.cols * map.rows;
-
             int source = map.cols * startRow;
 
             // Adjacency list representation of the
             // connected edges by declaring List class object
             // Declaring object of type List<Node>
-            List<List<Node>> adj
-                    = new ArrayList<List<Node>>();
+            List<List<Node>> adj = new ArrayList<List<Node>>();
 
             // Initialize list for every node
             for (int i = 0; i < map.rows; i++) {
@@ -104,8 +103,8 @@ public class Driver {
 
 
             // Calculating the single source shortest path
-            Djikstra djikstra = new Djikstra(V);
-            djikstra.algorithm(adj, source);
+            Dijkstra dijkstra = new Dijkstra(V);
+            dijkstra.algorithm(adj, source);
 //
 //        // Printing the shortest path to all the nodes
 //        // from the source node
@@ -113,19 +112,29 @@ public class Driver {
             int bestDjikstra = Integer.MAX_VALUE;
             int bestDjikstraIndex = 0;
             int bestDjikstraCoordinate = 0;
+
+            // Loops through all row values, prints out result
+            // for each path, saves the best one
             for (int i = 0; i < map.rows; i++) {
-                int rowValue = i * map.cols + map.cols - 1;
-                if (djikstra.dist[rowValue] < bestDjikstra) {
-                    bestDjikstra = djikstra.dist[rowValue];
+                int rowValue = i * map.cols + map.cols - 1; // get row index to check
+
+                // if elevation change is less, save the value as the best path
+                if (dijkstra.dist[rowValue] < bestDjikstra) {
+                    bestDjikstra = dijkstra.dist[rowValue];
                     bestDjikstraIndex = i;
                     bestDjikstraCoordinate = rowValue;
                 }
-                System.out.printf("The best route from %d to %d (%d, %d) is %d\n", source/map.cols, rowValue, i, map.cols, djikstra.dist[rowValue]);
+
+                // print out the stats on each path
+                if (i%40==0) {System.out.println(); System.out.print(i+" ");} // gives an index on the left for quickly finding value in printout
+                System.out.printf("The best route from %d to %d (%d, %d) is %d -- ", source/map.cols, rowValue, i, map.cols, dijkstra.dist[rowValue]);
             }
-            System.out.printf("The best path is from %d to %d with an elevation change of: %d", source/map.cols, bestDjikstraIndex, bestDjikstra);
+            System.out.printf("\nThe best path is from %d to %d with an elevation change of: %d", source/map.cols, bestDjikstraIndex, bestDjikstra);
+
+            // Draw the best shortest path or the specified shortest path
             if (BestEndRow) endRow = bestDjikstraCoordinate;
-            djikstra.getPath(endRow);
-            map.drawDjikstra(g, djikstra.path);
+            dijkstra.getPath(endRow);
+            map.drawDijkstra(g, dijkstra.path);
 
 
         }

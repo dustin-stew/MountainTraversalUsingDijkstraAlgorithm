@@ -5,7 +5,7 @@
 import java.util.*;
 
 // Main class DPQ
-public class Djikstra {
+public class Dijkstra {
 
     // Member variables of this class
     public int dist[];
@@ -19,26 +19,26 @@ public class Djikstra {
     public int count = 0;
 
     // Constructor of this class
-    public Djikstra(int V)
+    public Dijkstra(int V)
     {
 
         // This keyword refers to current object itself
-        this.V = V;
-        dist = new int[V];
-        settled = new HashSet<Integer>();
-        pq = new PriorityQueue<Node>(V, new Node());
-        this.parents = new int[V];
-        Arrays.fill(parents, -1);
+        this.V = V; // number of vertexes
+        dist = new int[V]; // empty array for distances
+        settled = new HashSet<Integer>(); // set for keeping track of visited nodes
+        pq = new PriorityQueue<Node>(V, new Node()); // priority queue of nodes for iterating through
+        this.parents = new int[V]; // this array is for backtracking the paths
+        Arrays.fill(parents, -1); // keeps track of parents that have been discovered
     }
-
-    // Method 1
+    
     // Dijkstra's Algorithm
     public void algorithm(List<List<Node> > adj, int src)
     {
 
-
+        // adjacency matrix
         this.adj = adj;
-
+        
+        // set each distance to the max value
         for (int i = 0; i < V; i++)
             dist[i] = Integer.MAX_VALUE;
 
@@ -47,7 +47,8 @@ public class Djikstra {
 
         // Distance to the source is 0
         dist[src] = 0;
-
+        
+        // iterates through queue until empty / all values are settled
         while (settled.size() != V) {
 
             // Terminating condition check when
@@ -76,9 +77,7 @@ public class Djikstra {
 
     }
 
-    // Method 2
-    // To process all the neighbours
-    // of the passed node
+    // Process all the neighbour of the passed node
     private void e_Neighbours(int u)
     {
 
@@ -120,7 +119,6 @@ public class Djikstra {
 
 }
 
-// Class 2
 // Helper class implementing Comparator interface
 // Representing a node in the graph
 class Node implements Comparator<Node> {
