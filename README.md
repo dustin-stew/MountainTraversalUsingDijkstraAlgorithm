@@ -20,7 +20,7 @@ Enter y to run and then you can do one of four things:
    * **Calculates**: all shortest paths between provided start and all eastern points  
 
 [MapDataDrawer.java](MapDataDrawer.java) - draws the routes on the topography map  
-[dijkstra.java](dijkstra.java) - uses Dijkstra's shortest path algorithm to calculate the optimal routes.  
+[Dijkstra.java](Dijkstra.java) - uses Dijkstra's shortest path algorithm to calculate the optimal routes.  
 [DrawingPanel.java](DrawingPanel.java)  - Helper class for drawing
 
 
