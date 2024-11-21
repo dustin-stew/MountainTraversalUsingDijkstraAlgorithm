@@ -1,5 +1,5 @@
 ## Traversing the Colorado Mountains using Dijkstra's Shortest Path Algorithm
-#### By: Dustin Stewart
+#### Author: Dustin Stewart
 ![image](images/MountainTraverse.gif)
 ### NOTE: I added these files to Github [here](https://github.com/dustin-stew/MountainTraversalUsingDijkstraAlgorithm) if that's easier.
 ### Structure
